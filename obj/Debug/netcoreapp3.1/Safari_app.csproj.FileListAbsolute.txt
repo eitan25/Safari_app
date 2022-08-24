@@ -1,0 +1,16 @@
+C:\Users\aytan\source\repos\Safari_app\Safari_app\bin\Debug\netcoreapp3.1\Safari_app.exe
+C:\Users\aytan\source\repos\Safari_app\Safari_app\bin\Debug\netcoreapp3.1\Safari_app.deps.json
+C:\Users\aytan\source\repos\Safari_app\Safari_app\bin\Debug\netcoreapp3.1\Safari_app.runtimeconfig.json
+C:\Users\aytan\source\repos\Safari_app\Safari_app\bin\Debug\netcoreapp3.1\Safari_app.runtimeconfig.dev.json
+C:\Users\aytan\source\repos\Safari_app\Safari_app\bin\Debug\netcoreapp3.1\Safari_app.dll
+C:\Users\aytan\source\repos\Safari_app\Safari_app\bin\Debug\netcoreapp3.1\Safari_app.pdb
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.csproj.AssemblyReference.cache
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.Form1.resources
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.csproj.GenerateResource.cache
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.AssemblyInfoInputs.cache
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.AssemblyInfo.cs
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.csproj.CoreCompileInputs.cache
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.dll
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.pdb
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.genruntimeconfig.cache
