@@ -5,7 +5,8 @@ namespace Classes
 	using System;
 	using System.Collections;
 	using System.Drawing.Imaging;
-	using static System.Math;
+    using System.IO;
+    using static System.Math;
 
 	//Base abstract class
 	public abstract class Animel
@@ -73,13 +74,17 @@ namespace Classes
 		const float radius = 20;
 		/////////////////addad icon
 		static Size s = new Size((int)radius * 2, (int)radius * 2);
-		static Icon icon = new Icon("/Users/aytan/source/repos/Safari_app/Safari_app/Pictures/lion.ico",s);
+		static string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+		static Icon icon = new Icon(path + "\\Pictures\\lion.ico",s);
+
+		/////////////////speed consts
         const float rest = 0;
         const float hunt = 10;
         public Lion() :this(0, 0) { }
 
 		public Lion(float xVal, float yVal)
         {
+			Console.WriteLine(path);
 			MOVE_X = 0;
 			MOVE_Y = 0;
 			X = xVal;
@@ -161,7 +166,8 @@ namespace Classes
 		const float radius = 10;
 		/////////////////addad icon
 		static Size s = new Size((int)radius * 2, (int)radius * 2);
-		static Icon icon = new Icon("/Users/aytan/source/repos/Safari_app/Safari_app/Pictures/rabbit.ico", s);
+		static string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+		static Icon icon = new Icon(path + "\\Pictures\\rabbit.ico", s);
 
 		public Rabbit() : this(0, 0) { }
 
