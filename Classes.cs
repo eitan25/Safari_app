@@ -108,7 +108,7 @@ namespace Classes
 		/// <summary>
 		/// search for a hunted animel object, when allocated - move towword it. 
 		/// </summary>
-        public override void Move(Hunted a)
+        public override void Move(Hunted a = null)
         {
 			//change move_x and move_y according to need.
 			if (SPEED == rest || a==null)		/////////////////////////////addad expression a==null in case that there is no object to hunt
