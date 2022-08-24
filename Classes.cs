@@ -64,7 +64,6 @@ namespace Classes
 			ISHUNTER = true;
 		}
 		
-		public abstract bool CanIEat(int xP, int yP);   //check if the animel can eat another animel
 		public abstract void Hunt(bool hunt);	//change to hunt mode	-new func	
 	}
 
@@ -104,18 +103,6 @@ namespace Classes
 				SPEED = hunt;
 			else
 				SPEED = rest;
-        }
-
-		/// <summary>
-		/// gets the x and y of a tuched object and check if it is a hunted animel.
-		/// if so - it "eats" it.
-		/// </summary>
-		/// <param name="xP"></param>
-		/// <param name="yP"></param>
-		/// <returns></returns>
-        public override bool CanIEat(int xP, int yP)
-        {
-            throw new NotImplementedException();
         }
 
 		/// <summary>
