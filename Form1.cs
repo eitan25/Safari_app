@@ -70,15 +70,14 @@ namespace Safari_app
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            l.Draw(g);
             if(r != null)   /////////////////////addad for test
                 r.Draw(g);
+            l.Draw(g);
         }
 
         //moves all the objects on screen according to timer.
         private void moveTimerEvent(object sender, EventArgs e)
         {
-            l.Move(r);
             if (r != null) ///////////////////////added for test
             {
                 r.Move();
@@ -88,6 +87,7 @@ namespace Safari_app
                     r = null;
                 }
             }
+            l.Move(r);
             this.Refresh();
 
         }
