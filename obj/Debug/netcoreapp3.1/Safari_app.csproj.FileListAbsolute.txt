@@ -14,3 +14,4 @@ C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari
 C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.dll
 C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.pdb
 C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.genruntimeconfig.cache
+C:\Users\aytan\source\repos\Safari_app\Safari_app\obj\Debug\netcoreapp3.1\Safari_app.Properties.Resources.resources

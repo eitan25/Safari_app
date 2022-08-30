@@ -144,8 +144,7 @@ namespace Classes
 	//Base inherited abstruct class
 	public abstract class Hunted : Animel
 	{
-		//if the lion "eats" the hunted animel the flag changes to true, and the animel deleted.
-		bool is_hunted;
+		bool is_hunted;		//if the lion "eats" the hunted animel the flag changes to true, and the animel deleted.
 
 		public Hunted()
         {
@@ -195,9 +194,9 @@ namespace Classes
 		{
 			X = X + MOVE_X;
 			Y = Y + MOVE_Y;
-			if (X >= 1000 || X<=0)
+			if (X >= 1000-radius || X <= 0+radius)
 				MOVE_X = -MOVE_X;
-			if (Y >= 500 || Y<=0)
+			if (Y >= 500-radius || Y <= 0+radius)
 				MOVE_Y = -MOVE_Y;
         }
     }
