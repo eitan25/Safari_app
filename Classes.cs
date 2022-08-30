@@ -77,8 +77,8 @@ namespace Classes
 			return (DISTANCE_FROM_LION).CompareTo(other.DISTANCE_FROM_LION);
 		}
 
-		public abstract void Move(Animel a = null);                 //the animel moves
-		public abstract void Draw(Graphics g);
+		public abstract void Move(Animel a);                 //the animel moves
+		public abstract void Draw(Graphics g);				//draw the animal to screan
 	}
 
 	//Base inherited abstruct class
@@ -153,14 +153,17 @@ namespace Classes
 			double y_val = (a.Y - this.Y);
 			dist = Sqrt(x_val * x_val + y_val * y_val);
 			steps = (int)(dist / SPEED);
-			this.MOVE_X = (a.X - this.X) / steps;
-			this.MOVE_Y = (a.Y - this.Y) / steps;
+			if (steps != 0)
+			{
+				this.MOVE_X = (a.X - this.X) / steps;
+				this.MOVE_Y = (a.Y - this.Y) / steps;
+			}
 			//move toward the hunted animel
 			X = X + MOVE_X;
 			Y = Y + MOVE_Y;
 
 			//if hunted change the flag of the animel to true
-			if (dist <= (RADIUS))   ////////////////////changed radius to this.radius from a.radius
+			if (dist <= (RADIUS) || steps == 0)   ////////////////////changed radius to this.radius from a.radius
 			{
 				a.IS_HUNTED = true;
 			}
@@ -235,9 +238,9 @@ namespace Classes
 		{
 			X = X + MOVE_X;
 			Y = Y + MOVE_Y;
-			if (X >= 1000 - radius * 2 || X <= 0 + radius * 2)
+			if (X >= 1000 - radius * 2 || X <= 0)
 				MOVE_X = -MOVE_X;
-			if (Y >= 500 - radius * 2 || Y <= 0 + radius * 2)
+			if (Y >= 500 - radius * 2 || Y <= 0)
 				MOVE_Y = -MOVE_Y;
 			//calculate distance
 			SetDistFromLion(a);
@@ -248,7 +251,7 @@ namespace Classes
 	[Serializable]
 	public class Giraffe : Hunted
 	{
-		const float radius = 35;
+		const float radius = 25;
 		/////////////////addad icon
 		static Size s = new Size((int)radius * 2, (int)radius * 2);
 		static string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
@@ -283,9 +286,9 @@ namespace Classes
 		{
 			X = X + MOVE_X;
 			Y = Y + MOVE_Y;
-			if (X >= 1000 - radius * 2 || X <= 0 + radius * 2)
+			if (X >= 1000 - radius || X <= 0)
 				MOVE_X = -MOVE_X;
-			if (Y >= 500 - radius * 2 || Y <= 0 + radius * 2)
+			if (Y >= 500 - radius || Y <= 0)
 				MOVE_Y = -MOVE_Y;
 			//calculate distance
 			SetDistFromLion(a);
@@ -293,76 +296,77 @@ namespace Classes
 	}
 
 	[Serializable]
-	public class AnimelList
-	{
-		//animels[0] is allways the lion.
-		//animels[1] is the hunted widch the lion pursuing.
-		protected List<Animel> animels;
+    public class AnimelList
+    {
+        //animels[0] is allways the lion.
+        //animels[1] is the hunted widch the lion pursuing.
+        protected List<Animel> animels;
 
-		public AnimelList()
+        public AnimelList()
         {
-			animels = new List<Animel>();
-        }
-		
-		public int Count()
-        {
-			return animels.Count;
+            animels = new List<Animel>();
         }
 
-		public Hunted Get()
+        public int Count()
         {
-			if(animels.Count > 1)
-				return ((Hunted)animels[1]);
-			return null;
+            return animels.Count;
         }
 
-		public Lion Get_lion()
-		{
-			if (animels.Count != 0)
-				return ((Lion)animels[0]);
-			return null;
-		}
-
-		public void Add(Animel animel)
+        public Hunted Get()
         {
-			animels.Add(animel);
+            if (animels.Count > 1)
+                return ((Hunted)animels[1]);
+            return null;
         }
 
-		public void Remove()
+        public Lion Get_lion()
         {
-			animels.RemoveAt(1);
+            if (animels.Count != 0)
+                return ((Lion)animels[0]);
+            return null;
         }
 
-		public void DrawAll(Graphics g)
-		{
+        public void Add(Animel animel)
+        {
+            animels.Add(animel);
+        }
+
+        public void Remove()
+        {
+            animels.RemoveAt(1);
+        }
+
+        public void DrawAll(Graphics g)
+        {
             animels.Sort();
             for (int i = 0; i < animels.Count; i++)
-				(animels[i]).Draw(g);
-		}
-
-		public void Hunt(bool start)
-        {
-			((Lion)animels[0]).Hunt(start);
+                (animels[i]).Draw(g);
         }
 
-		/// <summary>
-		/// moves all the hunted objects.
-		/// must come before the lion's movement.
-		/// </summary>
-		/// <param name="lion"></param>
-		public void MoveAll()
-		{
-			if(animels.Count > 1 )
-				if ((animels[1]).IS_HUNTED)
-					Remove();
-			if(animels.Count > 1)
-				animels[0].Move(animels[1]);
-			for (int i = 1; i < animels.Count; i++)
-			{
-				(animels[i]).Move(animels[0]);
-			}
-		}
+        public void Hunt(bool start)
+        {
+            ((Lion)animels[0]).Hunt(start);
+        }
 
-        //TODO: implement sort function.
+        /// <summary>
+        /// moves all the hunted objects.
+        /// must come before the lion's movement.
+        /// </summary>
+        /// <param name="lion"></param>
+        public void MoveAll()
+        {
+            if (animels.Count > 1)
+                if ((animels[1]).IS_HUNTED)
+                    Remove();
+            if (animels.Count > 1)
+                animels[0].Move(animels[1]);
+            for (int i = 1; i < animels.Count; i++)
+            {
+                (animels[i]).Move(animels[0]);
+            }
+        }
+
     }
+
+    
 }
