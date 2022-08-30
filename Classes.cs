@@ -4,12 +4,15 @@ namespace Classes
 {
 	using System;
 	using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.IO;
+	using System.IO;
+    using System.Windows.Forms;
     using static System.Math;
 
 	//Base abstract class
-	public abstract class Animel
+	[Serializable]
+	public abstract class Animel: IComparable<Animel>
 	{
 		float move_x;
 		float move_y;
@@ -19,23 +22,24 @@ namespace Classes
 		float speed;
 		bool isHunter;
 		bool is_hunted;     //if the lion "eats" the hunted animel the flag changes to true, and the animel deleted.
+		float distance_from_lion;
 
 
 		public float MOVE_X
-        {
-            get { return move_x; }
+		{
+			get { return move_x; }
 			set { move_x = value; }
-        }
+		}
 		public float MOVE_Y
 		{
 			get { return move_y; }
 			set { move_y = value; }
 		}
 		public float X
-        {
-            get { return x; }
-            set { x = value; }
-        }
+		{
+			get { return x; }
+			set { x = value; }
+		}
 		public float Y
 		{
 			get { return y; }
@@ -47,8 +51,8 @@ namespace Classes
 			set { radius = value; }
 		}
 		public float SPEED {
-            get { return speed; }
-            set { speed = value; }
+			get { return speed; }
+			set { speed = value; }
 		}
 		public bool ISHUNTER
 		{
@@ -62,37 +66,50 @@ namespace Classes
 			set { is_hunted = value; }
 		}
 
+		public float DISTANCE_FROM_LION
+		{
+			get { return distance_from_lion; }
+			set { distance_from_lion = value; }
+		}
+
+		public int CompareTo(Animel other)
+		{
+			return (DISTANCE_FROM_LION).CompareTo(other.DISTANCE_FROM_LION);
+		}
+
 		public abstract void Move(Animel a = null);                 //the animel moves
 		public abstract void Draw(Graphics g);
 	}
 
 	//Base inherited abstruct class
-	public abstract class hunter:Animel
-    {
+	[Serializable]
+	public abstract class hunter : Animel
+	{
 		public hunter()
-        {
+		{
 			ISHUNTER = true;
 		}
-		
-		public abstract void Hunt(bool hunt);	//change to hunt mode	-new func	
+
+		public abstract void Hunt(bool hunt);   //change to hunt mode	-new func	
 	}
 
 	//Lion inherited class
+	[Serializable]
 	public class Lion : hunter
-    {
+	{
 		const float radius = 20;
 		/////////////////addad icon
 		static Size s = new Size((int)radius * 2, (int)radius * 2);
 		static string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-		static Icon icon = new Icon(path + "\\Pictures\\lion.ico",s);
+		static Icon icon = new Icon(path + "\\Pictures\\lion.ico", s);
 
 		/////////////////speed consts
-        const float rest = 0;
-        const float hunt = 10;
-        public Lion() :this(0, 0) { }
+		const float rest = 0;
+		const float hunt = 10;
+		public Lion() : this(0, 0) { }
 
 		public Lion(float xVal, float yVal)
-        {
+		{
 			Console.WriteLine(path);
 			MOVE_X = 0;
 			MOVE_Y = 0;
@@ -100,36 +117,37 @@ namespace Classes
 			Y = yVal;
 			RADIUS = radius;
 			SPEED = rest;
+			DISTANCE_FROM_LION = -1;
 		}
 
 		public override void Draw(Graphics g)
-        {
-			g.DrawIcon(icon,(int)X,(int)Y);
-        }
+		{
+			g.DrawIcon(icon, (int)X, (int)Y);
+		}
 
 		/// <summary>
 		/// change the speed so the lion will attack.
 		/// </summary>
 		/// <param name="start"></param>
-        public override void Hunt(bool start)	//-new func implementation
-        {
+		public override void Hunt(bool start)   //-new func implementation
+		{
 			if (start == true)
 				SPEED = hunt;
 			else
 				SPEED = rest;
-        }
+		}
 
 		/// <summary>
 		/// search for a hunted animel object, when allocated - move towword it. 
 		/// </summary>
-        public override void Move(Animel a = null)
-        {
+		public override void Move(Animel a = null)
+		{
 			//change move_x and move_y according to need.
-			if (SPEED == rest || a==null)		/////////////////////////////addad expression a==null in case that there is no object to hunt
+			if (SPEED == rest || a == null)     /////////////////////////////addad expression a==null in case that there is no object to hunt
 				return;
 			double dist;
 			int steps;
-			
+
 			//calculate the step towards the Hunted animel
 			double x_val = (a.X - this.X);
 			double y_val = (a.Y - this.Y);
@@ -142,35 +160,31 @@ namespace Classes
 			Y = Y + MOVE_Y;
 
 			//if hunted change the flag of the animel to true
-			if (dist <= (RADIUS))	////////////////////changed radius to this.radius from a.radius
+			if (dist <= (RADIUS))   ////////////////////changed radius to this.radius from a.radius
 			{
 				a.IS_HUNTED = true;
 			}
 			return;
-        }
-    }
+		}
+	}
 
 	//Base inherited abstruct class
+	[Serializable]
 	public abstract class Hunted : Animel
 	{
-		float distance_from_lion;
 
 		public Hunted()
-        {
+		{
 			ISHUNTER = false;
-        }
+		}
 
-		public float DISTANCE_FROM_LION
-        {
-            get { return distance_from_lion; }
-            set { distance_from_lion = value; }
-        }
+		
 
-        /// <summary>
-        /// calculate the distance from the lion and sets it the the proper property.
-        /// </summary>
-        /// <param name="a">Lion</param>
-        public void SetDistFromLion(Animel a)
+		/// <summary>
+		/// calculate the distance from the lion and sets it the the proper property.
+		/// </summary>
+		/// <param name="a">Lion</param>
+		public void SetDistFromLion(Animel a)
 		{
 			double dist;
 			double x_val = (a.X - this.X);
@@ -179,9 +193,11 @@ namespace Classes
 			DISTANCE_FROM_LION = (float)dist;
 		}
 
+		
 	}
 
 	//rabbit inherited class
+	[Serializable]
 	public class Rabbit : Hunted
 	{
 		const float radius = 10;
@@ -197,7 +213,7 @@ namespace Classes
 			SPEED = 5;
 			Random rnd = new Random();
 			MOVE_X = rnd.Next(-(int)SPEED, (int)SPEED);
-			MOVE_Y = (float)Sqrt(SPEED*SPEED + MOVE_X*MOVE_X);
+			MOVE_Y = (float)Sqrt(SPEED * SPEED + MOVE_X * MOVE_X);
 			X = xVal;
 			Y = yVal;
 			RADIUS = radius;
@@ -219,18 +235,19 @@ namespace Classes
 		{
 			X = X + MOVE_X;
 			Y = Y + MOVE_Y;
-			if (X >= 1000-radius*2 || X <= 0+radius*2)
+			if (X >= 1000 - radius * 2 || X <= 0 + radius * 2)
 				MOVE_X = -MOVE_X;
-			if (Y >= 500-radius*2 || Y <= 0+radius*2)
+			if (Y >= 500 - radius * 2 || Y <= 0 + radius * 2)
 				MOVE_Y = -MOVE_Y;
 			//calculate distance
 			SetDistFromLion(a);
 		}
-    }
+	}
 
 	//Giraffe inherited class
+	[Serializable]
 	public class Giraffe : Hunted
-    {
+	{
 		const float radius = 35;
 		/////////////////addad icon
 		static Size s = new Size((int)radius * 2, (int)radius * 2);
@@ -275,13 +292,16 @@ namespace Classes
 		}
 	}
 
+	[Serializable]
 	public class AnimelList
 	{
-		protected ArrayList animels;
+		//animels[0] is allways the lion.
+		//animels[1] is the hunted widch the lion pursuing.
+		protected List<Animel> animels;
 
 		public AnimelList()
         {
-			animels = new ArrayList();
+			animels = new List<Animel>();
         }
 		
 		public int Count()
@@ -291,90 +311,58 @@ namespace Classes
 
 		public Hunted Get()
         {
-			if(animels.Count != 0)
-				return (Hunted)animels[0];
+			if(animels.Count > 1)
+				return ((Hunted)animels[1]);
 			return null;
         }
 
-		public void Add(Hunted animel)
+		public Lion Get_lion()
+		{
+			if (animels.Count != 0)
+				return ((Lion)animels[0]);
+			return null;
+		}
+
+		public void Add(Animel animel)
         {
 			animels.Add(animel);
         }
 
 		public void Remove()
         {
-			animels.RemoveAt(0);
+			animels.RemoveAt(1);
         }
 
 		public void DrawAll(Graphics g)
 		{
             animels.Sort();
             for (int i = 0; i < animels.Count; i++)
-				((Hunted)animels[i]).Draw(g);
+				(animels[i]).Draw(g);
 		}
+
+		public void Hunt(bool start)
+        {
+			((Lion)animels[0]).Hunt(start);
+        }
 
 		/// <summary>
 		/// moves all the hunted objects.
 		/// must come before the lion's movement.
 		/// </summary>
 		/// <param name="lion"></param>
-		public void MoveAll(Animel lion)
+		public void MoveAll()
 		{
-			if(animels.Count != 0 )
-				if (((Hunted)animels[0]).IS_HUNTED)
+			if(animels.Count > 1 )
+				if ((animels[1]).IS_HUNTED)
 					Remove();
-			for (int i = 0; i < animels.Count; i++)
+			if(animels.Count > 1)
+				animels[0].Move(animels[1]);
+			for (int i = 1; i < animels.Count; i++)
 			{
-				((Hunted)animels[i]).Move(lion);
+				(animels[i]).Move(animels[0]);
 			}
 		}
 
         //TODO: implement sort function.
     }
-
-
-	///
-	/*public class AnimelList
-	{
-		protected SortedList Animels;
-
-		public AnimelList()
-		{
-			Animels = new SortedList();
-		}
-
-		public void Add(Hunted animel)
-        {
-			Animels.Add(animel);
-        }
-
-		public int NextIndex
-		{
-			get
-			{
-				return Animels.Count;
-			}
-		}
-
-		public void Remove(int element)
-		{
-			if (Animels.Count != 0)
-			{
-				Animels.RemoveAt(0);
-			}
-		}
-
-		public void DrawAll(Graphics g)
-		{
-			for (int i = 0; i < Animels.Count; i++)
-				((Hunted)Animels[i]).Draw(g);
-		}
-
-		public void MoveAll(Animel lion)
-        {
-			for (int i = 0; i < Animels.Count; i++)
-				((Hunted)Animels[i]).Move(lion);
-        }
-
-	}*/
 }

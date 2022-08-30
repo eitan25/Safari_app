@@ -23,15 +23,12 @@ namespace Safari_app
         //can be changed with checking the radio box accordingly
         //0 for rabbit    1 for giraffe
         int which_animel = -1;
-        Lion l;
-        Hunted animel;
-        AnimelList hunted_animels;
+        AnimelList animels = new AnimelList();
 
         public Form1()
         {
             InitializeComponent();
-            l = new Lion(500, 250);
-            hunted_animels = new AnimelList();
+            animels.Add(new Lion(500, 250));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -47,7 +44,7 @@ namespace Safari_app
         //hunt enabler
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            l.Hunt(checkBox1.Checked);
+            animels.Hunt(checkBox1.Checked);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -57,12 +54,10 @@ namespace Safari_app
             switch (which_animel)
             {
                 case 0 :    //create rabbit
-                    animel = new Rabbit(coordinates.X, coordinates.Y);
-                    hunted_animels.Add(animel);
+                    animels.Add(new Rabbit(coordinates.X, coordinates.Y));
                     break;
                 case 1:     //create giraffe
-                    animel = new Giraffe(coordinates.X, coordinates.Y);
-                    hunted_animels.Add(animel);
+                    animels.Add(new Giraffe(coordinates.X, coordinates.Y));
                     break;
                 default:
                     break;
@@ -88,20 +83,17 @@ namespace Safari_app
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
-            hunted_animels.DrawAll(g);
-            l.Draw(g);
+            animels.DrawAll(g);
         }
 
         //moves all the objects on screen according to timer.
         private void moveTimerEvent(object sender, EventArgs e)
         {
-            l.Move(hunted_animels.Get());
-            if(hunted_animels.Count() != 0)
-                if (hunted_animels.Get().IS_HUNTED)
+            if(animels.Count() != 1)
+                if (animels.Get().IS_HUNTED)
                     checkBox1.Checked = false;
-            hunted_animels.MoveAll(l);
+            animels.MoveAll();
             this.Refresh();
-
         }
     }
 }
