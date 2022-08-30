@@ -100,8 +100,8 @@ namespace Safari_app
         private void button1_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();// + "..\\myModels";
-            saveFileDialog1.Filter = "model files (*.mdl)|*.mdl|All files (*.*)|*.*";
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
+            saveFileDialog1.Filter = "safary file (*.sff)|*.sff|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -118,8 +118,8 @@ namespace Safari_app
         private void button2_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();// + "..\\myModels";
-            openFileDialog1.Filter = "model files (*.mdl)|*.mdl|All files (*.*)|*.*";
+            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
+            openFileDialog1.Filter = "safary file (*.sff)|*.sff|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
