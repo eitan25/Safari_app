@@ -24,6 +24,7 @@ namespace Safari_app
         //0 for rabbit    1 for giraffe
         int which_animel = -1;
         AnimelList animels = new AnimelList();
+        int hunger_counter = 0;
 
         public Form1()
         {
@@ -59,6 +60,12 @@ namespace Safari_app
                 case 1:     //create giraffe
                     animels.Add(new Giraffe(coordinates.X, coordinates.Y));
                     break;
+                case 2:
+                    animels.Add(new Deer(coordinates.X, coordinates.Y));
+                    break;
+                case 3:
+                    animels.Add(new Zebra(coordinates.X, coordinates.Y));
+                    break;
                 default:
                     break;
             }
@@ -66,15 +73,25 @@ namespace Safari_app
         }
 
         //Rabbit selector
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void Rabbit_radioButton_CheckedChanged(object sender, EventArgs e)
         {
             which_animel = 0;
         }
 
         //Giraffe selector
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        private void Giraffe_radioButton_CheckedChanged(object sender, EventArgs e)
         {
             which_animel = 1;
+        }
+
+        private void Deer_radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            which_animel = 2;
+        }
+
+        private void Zebra_radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            which_animel = 3;
         }
 
         //draw all objects to the screen
@@ -89,18 +106,21 @@ namespace Safari_app
         //moves all the objects on screen according to timer.
         private void moveTimerEvent(object sender, EventArgs e)
         {
-            if (hunt_check_box.Checked == false)       //each time the lion is in rest, decrement its progress bar.
+            hunger_counter++;
+            if (hunger_counter % 3 == 0)        //hold the decrement of lion progress bar.
             {
                 lion_progress_bar.Increment(-1);
+                hunger_counter = 0;
             }
-            if(lion_progress_bar.Value == lion_progress_bar.Maximum)
+
+            if (lion_progress_bar.Value == lion_progress_bar.Maximum)
                 hunt_check_box.Checked = false;
             lion_progress_bar.Increment(animels.MoveAll() * 10);        //move lion progress bar according to eaten animal.
             this.Refresh();
         }
 
         //save button
-        private void button1_Click(object sender, EventArgs e)
+        private void save_button_Click(object sender, EventArgs e)
         {
             timer1.Stop();              //stop moving the items when trynig to save.
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -119,7 +139,7 @@ namespace Safari_app
             timer1.Start();             //continue items movment after the save try.
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void open_button_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();

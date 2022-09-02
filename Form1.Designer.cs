@@ -35,6 +35,8 @@ namespace Safari_app
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Zebra_radioButton = new System.Windows.Forms.RadioButton();
+            this.Deer_radioButton = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.hunt_check_box = new System.Windows.Forms.CheckBox();
@@ -43,8 +45,6 @@ namespace Safari_app
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.lion_progress_bar = new System.Windows.Forms.ProgressBar();
-            this.Deer_radioButton = new System.Windows.Forms.RadioButton();
-            this.Zebra_radioButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +77,30 @@ namespace Safari_app
             this.groupBox1.Text = "Create animals";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // Zebra_radioButton
+            // 
+            this.Zebra_radioButton.AutoSize = true;
+            this.Zebra_radioButton.Location = new System.Drawing.Point(14, 126);
+            this.Zebra_radioButton.Name = "Zebra_radioButton";
+            this.Zebra_radioButton.Size = new System.Drawing.Size(69, 24);
+            this.Zebra_radioButton.TabIndex = 4;
+            this.Zebra_radioButton.TabStop = true;
+            this.Zebra_radioButton.Text = "Zebra";
+            this.Zebra_radioButton.UseVisualStyleBackColor = true;
+            this.Zebra_radioButton.CheckedChanged += new System.EventHandler(this.Zebra_radioButton_CheckedChanged);
+            // 
+            // Deer_radioButton
+            // 
+            this.Deer_radioButton.AutoSize = true;
+            this.Deer_radioButton.Location = new System.Drawing.Point(14, 96);
+            this.Deer_radioButton.Name = "Deer_radioButton";
+            this.Deer_radioButton.Size = new System.Drawing.Size(62, 24);
+            this.Deer_radioButton.TabIndex = 3;
+            this.Deer_radioButton.TabStop = true;
+            this.Deer_radioButton.Text = "Deer";
+            this.Deer_radioButton.UseVisualStyleBackColor = true;
+            this.Deer_radioButton.CheckedChanged += new System.EventHandler(this.Deer_radioButton_CheckedChanged);
+            // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
@@ -87,7 +111,7 @@ namespace Safari_app
             this.radioButton3.TabIndex = 2;
             this.radioButton3.Text = "Giraffe";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.Giraffe_radioButton_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -99,7 +123,7 @@ namespace Safari_app
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Text = "Rabbit";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.Rabbit_radioButton_CheckedChanged);
             // 
             // hunt_check_box
             // 
@@ -129,7 +153,7 @@ namespace Safari_app
             this.button1.TabIndex = 2;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.save_button_Click);
             // 
             // button2
             // 
@@ -140,7 +164,7 @@ namespace Safari_app
             this.button2.TabIndex = 3;
             this.button2.Text = "Load";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.open_button_Click);
             // 
             // lion_progress_bar
             // 
@@ -152,28 +176,6 @@ namespace Safari_app
             this.lion_progress_bar.Size = new System.Drawing.Size(125, 23);
             this.lion_progress_bar.TabIndex = 4;
             this.lion_progress_bar.Click += new System.EventHandler(this.performBarProgress);
-            // 
-            // Deer_radioButton
-            // 
-            this.Deer_radioButton.AutoSize = true;
-            this.Deer_radioButton.Location = new System.Drawing.Point(14, 96);
-            this.Deer_radioButton.Name = "Deer_radioButton";
-            this.Deer_radioButton.Size = new System.Drawing.Size(62, 24);
-            this.Deer_radioButton.TabIndex = 3;
-            this.Deer_radioButton.TabStop = true;
-            this.Deer_radioButton.Text = "Deer";
-            this.Deer_radioButton.UseVisualStyleBackColor = true;
-            // 
-            // Zebra_radioButton
-            // 
-            this.Zebra_radioButton.AutoSize = true;
-            this.Zebra_radioButton.Location = new System.Drawing.Point(14, 126);
-            this.Zebra_radioButton.Name = "Zebra_radioButton";
-            this.Zebra_radioButton.Size = new System.Drawing.Size(69, 24);
-            this.Zebra_radioButton.TabIndex = 4;
-            this.Zebra_radioButton.TabStop = true;
-            this.Zebra_radioButton.Text = "Zebra";
-            this.Zebra_radioButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

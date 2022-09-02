@@ -20,7 +20,7 @@ namespace Classes
 		float y;
 		float radius;
 		float speed;
-		bool isHunter;
+		bool is_hunter;
 		bool is_hunted;     //if the lion "eats" the hunted animel the flag changes to true, and the animel deleted.
 		float distance_from_lion;
 
@@ -54,10 +54,10 @@ namespace Classes
 			get { return speed; }
 			set { speed = value; }
 		}
-		public bool ISHUNTER
+		public bool IS_HUNTER
 		{
-			get { return isHunter; }
-			set { isHunter = value; }
+			get { return is_hunter; }
+			set { is_hunter = value; }
 		}
 
 		public bool IS_HUNTED
@@ -83,11 +83,11 @@ namespace Classes
 
 	//Base inherited abstruct class
 	[Serializable]
-	public abstract class hunter : Animel
+	public abstract class Hunter : Animel
 	{
-		public hunter()
+		public Hunter()
 		{
-			ISHUNTER = true;
+			IS_HUNTER = true;
 		}
 
 		public abstract void Hunt(bool hunt);   //change to hunt mode	-new func	
@@ -95,13 +95,13 @@ namespace Classes
 
 	//Lion inherited class
 	[Serializable]
-	public class Lion : hunter
+	public class Lion : Hunter
 	{
-		const float radius = 20;
+		const float c_radius = 20;
 		/////////////////addad icon
-		static Size s = new Size((int)radius * 2, (int)radius * 2);
-		static string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-		static Icon icon = new Icon(path + "\\Pictures\\lion.ico", s);
+		static Size s_s = new Size((int)c_radius * 2, (int)c_radius * 2);
+		static string s_path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+		static Icon s_icon = new Icon(s_path + "\\Pictures\\lion.ico", s_s);
 
 		/////////////////speed consts
 		const float rest = 0;
@@ -110,19 +110,19 @@ namespace Classes
 
 		public Lion(float xVal, float yVal)
 		{
-			Console.WriteLine(path);
+			Console.WriteLine(s_path);
 			MOVE_X = 0;
 			MOVE_Y = 0;
 			X = xVal;
 			Y = yVal;
-			RADIUS = radius;
+			RADIUS = c_radius;
 			SPEED = rest;
 			DISTANCE_FROM_LION = -1;
 		}
 
 		public override void Draw(Graphics g)
 		{
-			g.DrawIcon(icon, (int)X, (int)Y);
+			g.DrawIcon(s_icon, (int)X, (int)Y);
 		}
 
 		/// <summary>
@@ -178,7 +178,7 @@ namespace Classes
 
 		public Hunted()
 		{
-			ISHUNTER = false;
+			IS_HUNTER = false;
 		}
 
 		
@@ -203,11 +203,11 @@ namespace Classes
 	[Serializable]
 	public class Rabbit : Hunted
 	{
-		const float radius = 10;
+		const float c_radius = 10;
 		/////////////////addad icon
-		static Size s = new Size((int)radius * 2, (int)radius * 2);
-		static string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-		static Icon icon = new Icon(path + "\\Pictures\\rabbit.ico", s);
+		static Size s_s = new Size((int)c_radius * 2, (int)c_radius * 2);
+		static string s_path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+		static Icon s_icon = new Icon(s_path + "\\Pictures\\rabbit.ico", s_s);
 
 		public Rabbit() : this(0, 0) { }
 
@@ -219,14 +219,14 @@ namespace Classes
 			MOVE_Y = (float)Sqrt(SPEED * SPEED + MOVE_X * MOVE_X);
 			X = xVal;
 			Y = yVal;
-			RADIUS = radius;
+			RADIUS = c_radius;
 			IS_HUNTED = false;
 			DISTANCE_FROM_LION = 0;
 		}
 
 		public override void Draw(Graphics g)
 		{
-			g.DrawIcon(icon, (int)X, (int)Y);
+			g.DrawIcon(s_icon, (int)X, (int)Y);
 		}
 
 		/// <summary>
@@ -238,9 +238,9 @@ namespace Classes
 		{
 			X = X + MOVE_X;
 			Y = Y + MOVE_Y;
-			if (X >= 1000 - radius * 2 || X <= 0)
+			if (X >= 1000 - c_radius * 2 || X <= 0)
 				MOVE_X = -MOVE_X;
-			if (Y >= 500 - radius * 2 || Y <= 0)
+			if (Y >= 500 - c_radius * 2 || Y <= 0)
 				MOVE_Y = -MOVE_Y;
 			//calculate distance
 			SetDistFromLion(a);
@@ -256,11 +256,11 @@ namespace Classes
 	[Serializable]
 	public class Giraffe : Hunted
 	{
-		const float radius = 25;
+		const float c_radius = 25;
 		/////////////////addad icon
-		static Size s = new Size((int)radius * 2, (int)radius * 2);
-		static string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-		static Icon icon = new Icon(path + "\\Pictures\\giraffe.ico", s);
+		static Size s_s = new Size((int)c_radius * 2, (int)c_radius * 2);
+		static string s_path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+		static Icon s_icon = new Icon(s_path + "\\Pictures\\giraffe.ico", s_s);
 
 		public Giraffe() : this(0, 0) { }
 
@@ -272,14 +272,14 @@ namespace Classes
 			MOVE_Y = (float)Sqrt(SPEED * SPEED + MOVE_X * MOVE_X);
 			X = xVal;
 			Y = yVal;
-			RADIUS = radius;
+			RADIUS = c_radius;
 			IS_HUNTED = false;
 			DISTANCE_FROM_LION = 0;
 		}
 
 		public override void Draw(Graphics g)
 		{
-			g.DrawIcon(icon, (int)X, (int)Y);
+			g.DrawIcon(s_icon, (int)X, (int)Y);
 		}
 
 		/// <summary>
@@ -291,9 +291,9 @@ namespace Classes
 		{
 			X = X + MOVE_X;
 			Y = Y + MOVE_Y;
-			if (X >= 1000 - radius || X <= 0)
+			if (X >= 1000 - c_radius || X <= 0)
 				MOVE_X = -MOVE_X;
-			if (Y >= 500 - radius || Y <= 0)
+			if (Y >= 500 - c_radius || Y <= 0)
 				MOVE_Y = -MOVE_Y;
 			//calculate distance
 			SetDistFromLion(a);
@@ -302,6 +302,112 @@ namespace Classes
 		public override int HowMachISatisfaing()
 		{
 			return 6;
+		}
+	}
+
+	//Deer inherited class
+	[Serializable]
+	public class Deer : Hunted
+	{
+		const float c_radius = 15;
+		/////////////////addad icon
+		static Size s_s = new Size((int)c_radius * 2, (int)c_radius * 2);
+		static string s_path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+		static Icon s_icon = new Icon(s_path + "\\Pictures\\deer.ico", s_s);
+
+		public Deer() : this(0, 0) { }
+
+		public Deer(float xVal, float yVal)
+		{
+			SPEED = 13;
+			Random rnd = new Random();
+			MOVE_X = rnd.Next(-(int)SPEED, (int)SPEED);
+			MOVE_Y = (float)Sqrt(SPEED * SPEED + MOVE_X * MOVE_X);
+			X = xVal;
+			Y = yVal;
+			RADIUS = c_radius;
+			IS_HUNTED = false;
+			DISTANCE_FROM_LION = 0;
+		}
+
+		public override void Draw(Graphics g)
+		{
+			g.DrawIcon(s_icon, (int)X, (int)Y);
+		}
+
+		/// <summary>
+		/// moving forword and change direction when hits a wall.
+		/// saves the distance between the lion and the animel in each step of the animel.
+		/// </summary>
+		/// <param name="a">Lion</param>
+		public override void Move(Animel a)
+		{
+			X = X + MOVE_X;
+			Y = Y + MOVE_Y;
+			if (X >= 1000 - c_radius || X <= 0)
+				MOVE_X = -MOVE_X;
+			if (Y >= 500 - c_radius || Y <= 0)
+				MOVE_Y = -MOVE_Y;
+			//calculate distance
+			SetDistFromLion(a);
+		}
+
+		public override int HowMachISatisfaing()
+		{
+			return 3;
+		}
+	}
+
+	//Deer inherited class
+	[Serializable]
+	public class Zebra : Hunted
+	{
+		const float c_radius = 15;
+		/////////////////addad icon
+		static Size s_s = new Size((int)c_radius * 2, (int)c_radius * 2);
+		static string s_path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+		static Icon s_icon = new Icon(s_path + "\\Pictures\\zebra.ico", s_s);
+
+		public Zebra() : this(0, 0) { }
+
+		public Zebra(float xVal, float yVal)
+		{
+			SPEED = 11;
+			Random rnd = new Random();
+			MOVE_X = rnd.Next(-(int)SPEED, (int)SPEED);
+			MOVE_Y = (float)Sqrt(SPEED * SPEED + MOVE_X * MOVE_X);
+			X = xVal;
+			Y = yVal;
+			RADIUS = c_radius;
+			IS_HUNTED = false;
+			DISTANCE_FROM_LION = 0;
+		}
+
+		public override void Draw(Graphics g)
+		{
+			g.DrawIcon(s_icon, (int)X, (int)Y);
+		}
+
+		/// <summary>
+		/// moving forword and change direction when hits a wall.
+		/// saves the distance between the lion and the animel in each step of the animel.
+		/// </summary>
+		/// <param name="a">Lion</param>
+		public override void Move(Animel a)
+		{
+			X = X + MOVE_X;
+			Y = Y + MOVE_Y;
+			if (X >= 1000 - c_radius || X <= 0)
+				MOVE_X = -MOVE_X;
+			if (Y >= 500 - c_radius || Y <= 0)
+				MOVE_Y = -MOVE_Y;
+			//calculate distance
+			SetDistFromLion(a);
+		}
+
+		public override int HowMachISatisfaing()
+		{
+			return 3;
 		}
 	}
 
