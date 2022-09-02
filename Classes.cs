@@ -196,7 +196,7 @@ namespace Classes
 			DISTANCE_FROM_LION = (float)dist;
 		}
 
-		
+		public abstract int HowMachISatisfaing();   //return the weight of the annimal for the lion's satisfactory.
 	}
 
 	//rabbit inherited class
@@ -245,7 +245,12 @@ namespace Classes
 			//calculate distance
 			SetDistFromLion(a);
 		}
-	}
+
+        public override int HowMachISatisfaing()
+        {
+            return 2;
+        }
+    }
 
 	//Giraffe inherited class
 	[Serializable]
@@ -293,6 +298,11 @@ namespace Classes
 			//calculate distance
 			SetDistFromLion(a);
 		}
+
+		public override int HowMachISatisfaing()
+		{
+			return 6;
+		}
 	}
 
 	[Serializable]
@@ -331,9 +341,11 @@ namespace Classes
             animels.Add(animel);
         }
 
-        public void Remove()
+        public int Remove()
         {
+			int lion_satisfactory = ((Hunted)animels[1]).HowMachISatisfaing();
             animels.RemoveAt(1);
+			return lion_satisfactory;
         }
 
         public void DrawAll(Graphics g)
@@ -353,17 +365,18 @@ namespace Classes
         /// must come before the lion's movement.
         /// </summary>
         /// <param name="lion"></param>
-        public void MoveAll()
+        public int MoveAll()
         {
             if (animels.Count > 1)
                 if ((animels[1]).IS_HUNTED)
-                    Remove();
+                    return Remove();
             if (animels.Count > 1)
                 animels[0].Move(animels[1]);
             for (int i = 1; i < animels.Count; i++)
             {
                 (animels[i]).Move(animels[0]);
             }
+			return 0;
         }
 
     }

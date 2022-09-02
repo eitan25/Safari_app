@@ -44,7 +44,7 @@ namespace Safari_app
         //hunt enabler
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            animels.Hunt(checkBox1.Checked);
+            animels.Hunt(hunt_check_box.Checked);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -89,16 +89,20 @@ namespace Safari_app
         //moves all the objects on screen according to timer.
         private void moveTimerEvent(object sender, EventArgs e)
         {
-            if(animels.Count() != 1)
-                if (animels.Get().IS_HUNTED)
-                    checkBox1.Checked = false;
-            animels.MoveAll();
+            if (hunt_check_box.Checked == false)       //each time the lion is in rest, decrement its progress bar.
+            {
+                lion_progress_bar.Increment(-1);
+            }
+            if(lion_progress_bar.Value == lion_progress_bar.Maximum)
+                hunt_check_box.Checked = false;
+            lion_progress_bar.Increment(animels.MoveAll() * 10);        //move lion progress bar according to eaten animal.
             this.Refresh();
         }
 
         //save button
         private void button1_Click(object sender, EventArgs e)
         {
+            timer1.Stop();              //stop moving the items when trynig to save.
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
             saveFileDialog1.Filter = "safary file (*.sff)|*.sff|All files (*.*)|*.*";
@@ -109,10 +113,10 @@ namespace Safari_app
                 IFormatter formatter = new BinaryFormatter();
                 using (Stream stream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
-                    //!!!!
                     formatter.Serialize(stream, animels);
                 }
             }
+            timer1.Start();             //continue items movment after the save try.
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -129,7 +133,14 @@ namespace Safari_app
                 //!!!!
                 animels = (AnimelList)binaryFormatter.Deserialize(stream);
                 pictureBox1.Invalidate();
+                lion_progress_bar.Increment(-100);           //reset lion hunger
+                hunt_check_box.Checked = false;              //reset hunt check box
             }
+        }
+
+        private void performBarProgress(object sender, EventArgs e)
+        {
+
         }
     }
 }
