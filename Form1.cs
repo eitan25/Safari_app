@@ -32,16 +32,6 @@ namespace Safari_app
             animels.Add(new Lion(500, 250));
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         //hunt enabler
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -84,11 +74,13 @@ namespace Safari_app
             which_animel = 1;
         }
 
+        //Deer selector
         private void Deer_radioButton_CheckedChanged(object sender, EventArgs e)
         {
             which_animel = 2;
         }
 
+        //Zebra selector
         private void Zebra_radioButton_CheckedChanged(object sender, EventArgs e)
         {
             which_animel = 3;
@@ -156,11 +148,6 @@ namespace Safari_app
                 lion_progress_bar.Increment(-100);           //reset lion hunger
                 hunt_check_box.Checked = false;              //reset hunt check box
             }
-        }
-
-        private void performBarProgress(object sender, EventArgs e)
-        {
-
         }
     }
 }

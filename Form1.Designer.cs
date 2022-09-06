@@ -75,11 +75,11 @@ namespace Safari_app
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create animals";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // Zebra_radioButton
             // 
             this.Zebra_radioButton.AutoSize = true;
+            this.Zebra_radioButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Zebra_radioButton.Location = new System.Drawing.Point(14, 126);
             this.Zebra_radioButton.Name = "Zebra_radioButton";
             this.Zebra_radioButton.Size = new System.Drawing.Size(69, 24);
@@ -92,6 +92,7 @@ namespace Safari_app
             // Deer_radioButton
             // 
             this.Deer_radioButton.AutoSize = true;
+            this.Deer_radioButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Deer_radioButton.Location = new System.Drawing.Point(14, 96);
             this.Deer_radioButton.Name = "Deer_radioButton";
             this.Deer_radioButton.Size = new System.Drawing.Size(62, 24);
@@ -175,7 +176,6 @@ namespace Safari_app
             this.lion_progress_bar.Name = "lion_progress_bar";
             this.lion_progress_bar.Size = new System.Drawing.Size(125, 23);
             this.lion_progress_bar.TabIndex = 4;
-            this.lion_progress_bar.Click += new System.EventHandler(this.performBarProgress);
             // 
             // Form1
             // 
@@ -193,7 +193,6 @@ namespace Safari_app
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Safary Application";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

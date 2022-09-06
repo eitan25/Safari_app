@@ -415,7 +415,7 @@ namespace Classes
     public class AnimelList
     {
         //animels[0] is allways the lion.
-        //animels[1] is the hunted widch the lion pursuing.
+        //animels[1] is the hunted wich the lion pursuing.
         protected List<Animel> animels;
 
         public AnimelList()
